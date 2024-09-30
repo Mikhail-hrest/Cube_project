@@ -1,0 +1,6 @@
+/home/mikhail/informatics/Cube_project/tmp/CMakeFiles/main.dir
+/home/mikhail/informatics/Cube_project/tmp/CMakeFiles/edit_cache.dir
+/home/mikhail/informatics/Cube_project/tmp/CMakeFiles/rebuild_cache.dir
+/home/mikhail/informatics/Cube_project/tmp/Cyber_cube/CMakeFiles/Cyber_cube.dir
+/home/mikhail/informatics/Cube_project/tmp/Cyber_cube/CMakeFiles/edit_cache.dir
+/home/mikhail/informatics/Cube_project/tmp/Cyber_cube/CMakeFiles/rebuild_cache.dir

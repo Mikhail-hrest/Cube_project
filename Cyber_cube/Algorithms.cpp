@@ -23,7 +23,7 @@ bool PuzzleSolver::find_yellow(){
 }
 
 std::string PuzzleSolver::get_algorithm_cross(){
-    // std::cout << *rubic <<"\nRunning cross...\n";
+    std::cout << *rubic <<"\nRunning cross...\n";
     std::string result = "";
     
     for(size_t cnt = 0; cnt < 4;++cnt){
@@ -119,7 +119,7 @@ std::string PuzzleSolver::get_algorithm_cross(){
     тогда нужные элементы будут наверху
 */
 std::string PuzzleSolver::get_algorithm_F2L(){
-    // std::cout << *rubic <<"\nRunning f2l...\n";
+    std::cout << *rubic <<"\nRunning f2l...\n";
     std::string result = "";
     while(find_yellow()){
         if(rubic->Blue->get_color(3) != 'y' && rubic->Orange->get_color(5) != 'y'){
@@ -329,18 +329,18 @@ std::string PuzzleSolver::get_algorithm_F2L(){
         result = result + "uluLuuluL";
     }else if((rubic->Blue->get_color(0) == 'o' && rubic->Orange->get_color(2) == 'b' && rubic->Yellow->get_color(6) == 'w')){
         rubic->move('l');
-        rubic->move('U');
-        rubic->move('L');
         rubic->move('u');
+        rubic->move('L');
+        rubic->move('U');
         rubic->move('l');
-        rubic->move('U');
-        rubic->move('L');
         rubic->move('u');
+        rubic->move('L');
+        rubic->move('U');
         rubic->move('l');
-        rubic->move('U');
-        rubic->move('L');
         rubic->move('u');
-        result = result + "lULulULulULu";
+        rubic->move('L');
+        rubic->move('U');
+        result = result + "luLUluLUluLU";
     }
 
     while(!((rubic->Green->get_color(2) == 'w' && rubic->Orange->get_color(0) == 'o' && rubic->Yellow->get_color(0) == 'g') ||
@@ -386,6 +386,7 @@ std::string PuzzleSolver::get_algorithm_F2L(){
         rubic->move('u');
         result = result + "LUluLUluLUlu";
     }
+
 
     while(!((rubic->Green->get_color(0) == 'w' && rubic->Red->get_color(2) == 'r' && rubic->Yellow->get_color(2) == 'g') ||
             (rubic->Green->get_color(0) == 'g' && rubic->Red->get_color(2) == 'w' && rubic->Yellow->get_color(2) == 'r') ||
@@ -435,7 +436,7 @@ std::string PuzzleSolver::get_algorithm_F2L(){
 }
 
 std::string PuzzleSolver::get_algorithm_OLL(){
-    // std::cout << *rubic <<"\nRunning oll...\n";
+    std::cout << *rubic <<"\nRunning oll...\n";
     std::string result = "";
 
     while(!(rubic->Yellow->get_color(1) == 'y' && rubic->Yellow->get_color(3) == 'y' &&
@@ -621,7 +622,7 @@ std::string PuzzleSolver::get_algorithm_OLL(){
 }
 
 std::string PuzzleSolver::get_algorithm_PLL(){
-    // std::cout << *rubic <<"\nRunning pll...\n";
+    std::cout << *rubic <<"\nRunning pll...\n";
     std::string result = "";
     while(!(rubic->Blue->get_color(0) == rubic->Blue->get_color(2) && rubic->Blue->get_color(0) == rubic->Blue->get_color(1) &&
         rubic->Red->get_color(0) == rubic->Red->get_color(2) && rubic->Red->get_color(0) == rubic->Red->get_color(1) &&
@@ -696,11 +697,7 @@ std::string PuzzleSolver::get_algorithm_PLL(){
         }else if(rubic->Blue->get_color(0) == rubic->Blue->get_color(2) &&
                  rubic->Green->get_color(0) == rubic->Green->get_color(2) &&
                  rubic->Red->get_color(0) == rubic->Red->get_color(2) &&
-                 rubic->Orange->get_color(0) == rubic->Orange->get_color(2) &&
-                 rubic->Orange->get_color(1) == rubic->Red->get_color(2) &&
-                 rubic->Red->get_color(1) == rubic->Orange->get_color(2) &&
-                 rubic->Green->get_color(1) == rubic->Blue->get_color(2) &&
-                 rubic->Blue->get_color(1) == rubic->Green->get_color(2)){
+                 rubic->Orange->get_color(0) == rubic->Orange->get_color(2)){
             rubic->move('R');
             rubic->move('R');
             rubic->move('L');
@@ -745,7 +742,10 @@ std::string PuzzleSolver::get_algorithm_PLL(){
             rubic->move('r');
             rubic->move('f');
             result = result + "RUrurFRRuruRUrf";
-        }else{
+        }else if(rubic->Orange->get_color(0) != rubic->Orange->get_color(2) &&
+                rubic->Green->get_color(0) != rubic->Green->get_color(2) && 
+                rubic->Red->get_color(0) == rubic->Red->get_color(2) &&
+                rubic->Blue->get_color(0) == rubic->Blue->get_color(2)){
             rubic->move('F');
             rubic->move('R');
             rubic->move('u');
@@ -768,6 +768,7 @@ std::string PuzzleSolver::get_algorithm_PLL(){
         }
         rubic->move('U');
         result = result + "U";
+        std::cout << "u";
     }
 
     while(rubic->Blue->get_color(4) != rubic->Blue->get_color(1)){
@@ -803,9 +804,21 @@ std::string PuzzleSolver::optimization_of_the_result(std::string prev){
 }
 
 std::string PuzzleSolver::puzzle_solution(){
+    if(wrong) return "";
     std::string result = get_algorithm_cross();
     result += get_algorithm_F2L();
     result += get_algorithm_OLL();
     result += get_algorithm_PLL();
+    return result;
+}
+
+std::string PuzzleSolver::get_state(){
+    std::string result = "";
+    for(int i = 0; i < 9;++i) result = result + rubic->Yellow->get_color(i);
+    for(int i = 0; i < 9;++i) result = result + rubic->Orange->get_color(i);
+    for(int i = 0; i < 9;++i) result = result + rubic->Blue->get_color(i);
+    for(int i = 0; i < 9;++i) result = result + rubic->Red->get_color(i);
+    for(int i = 0; i < 9;++i) result = result + rubic->White->get_color(i);
+    for(int i = 0; i < 9;++i) result = result + rubic->Green->get_color(i);
     return result;
 }

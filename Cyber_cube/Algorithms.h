@@ -118,6 +118,7 @@
 class PuzzleSolver{
     bool find_white(size_t lvl);
     bool find_yellow();
+    bool wrong = false;
 public:
     RubicsCube* rubic = nullptr;
     /*
@@ -128,6 +129,11 @@ public:
         char s;
         std::cin >> s;
         while(std::cin.good() && !std::cin.eof()){
+            if(s != 'R' && s != 'L' && s != 'U' && s != 'D' && s != 'F' && s != 'B' &&
+                s != 'r' && s != 'l' && s != 'u' && s != 'd' && s != 'f' && s != 'b'){
+                wrong = true;
+                break;
+            }
             rubic->move(s);
             std::cin >> s;
         }
@@ -145,6 +151,8 @@ public:
     std::string get_algorithm_PLL();
 
     std::string optimization_of_the_result(std::string prev);
+
+    std::string get_state();
 
 };
 

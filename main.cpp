@@ -3,6 +3,7 @@
 
 int main(){
     PuzzleSolver A(true);
+    std::cout << *(A.rubic); 
     std::string res = A.puzzle_solution();
     std::cout << "Неоптимизированная строка:\n" << res << std::endl;
     std::cout << "Оптимизированная строка:\n" << A.optimization_of_the_result(res) << std::endl;

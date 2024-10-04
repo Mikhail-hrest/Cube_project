@@ -142,6 +142,27 @@ public:
     ~PuzzleSolver() {
         delete rubic;
     }
+    PuzzleSolver(std::string state){
+        if(state.length() != 54) rubic = new RubicsCube(true);
+        else{
+            rubic = new RubicsCube;
+            for(size_t i = 0; i < 54; ++i){
+                if(i < 9){
+                    rubic->Yellow->set_color(i, state[i]);
+                }else if(i<18){
+                    rubic->Orange->set_color(i-9, state[i]); 
+                }else if(i<27){
+                    rubic->Blue->set_color(i-18, state[i]); 
+                }else if(i<36){
+                    rubic->Red->set_color(i-27, state[i]); 
+                }else if(i<45){
+                    rubic->White->set_color(i-36, state[i]); 
+                }else if(i<54){
+                    rubic->Green->set_color(9-(i-45), state[i]); 
+                }
+            }
+        }
+    }
 
     std::string puzzle_solution();
 

@@ -308,50 +308,74 @@ void FaceOfCube::double_rotation(){
     clockwise_rotation();
 }
 
-RubicsCube::RubicsCube(bool is_asm){
-    std::cout << "Enter Yellow face:\n"; 
-    Yellow = new FaceOfCube(is_asm, 'y');
-    std::cout << "Enter White face:\n";
-    White = new FaceOfCube(is_asm);
-    std::cout << "Enter Red face:\n";
-    Red = new FaceOfCube(is_asm, 'r');
-    std::cout << "Enter Blue face:\n";
-    Blue = new FaceOfCube(is_asm, 'b');
-    std::cout << "Enter Green face:\n";
-    Green = new FaceOfCube(is_asm, 'g');
-    std::cout << "Enter Orange face:\n";
-    Orange = new FaceOfCube(is_asm, 'o');
+RubicsCube::RubicsCube(bool is_asm, std::string st){
+    if(st.length() == 54){
+        Yellow = new FaceOfCube(true, 'y');
+        White = new FaceOfCube(true);
+        Red = new FaceOfCube(true, 'r');
+        Blue = new FaceOfCube(true, 'b');
+        Green = new FaceOfCube(true, 'g');
+        Orange = new FaceOfCube(true, 'o');
+        for(size_t i = 0; i < 54; ++i){
+            if(i < 9){
+                Yellow->set_color(i, st[i]);
+            }else if(i<18){
+                Orange->set_color(i-9, st[i]); 
+            }else if(i<27){
+                Blue->set_color(i-18, st[i]); 
+            }else if(i<36){
+                Red->set_color(i-27, st[i]); 
+            }else if(i<45){
+                White->set_color(i-36, st[i]); 
+            }else if(i<54){
+                Green->set_color(9-(i-45), st[i]); 
+            }
+        }
+    }else{
+        std::cout << "Enter Yellow face:\n"; 
+        Yellow = new FaceOfCube(is_asm, 'y');
+        std::cout << "Enter White face:\n";
+        White = new FaceOfCube(is_asm);
+        std::cout << "Enter Red face:\n";
+        Red = new FaceOfCube(is_asm, 'r');
+        std::cout << "Enter Blue face:\n";
+        Blue = new FaceOfCube(is_asm, 'b');
+        std::cout << "Enter Green face:\n";
+        Green = new FaceOfCube(is_asm, 'g');
+        std::cout << "Enter Orange face:\n";
+        Orange = new FaceOfCube(is_asm, 'o');
 
     //пусть фронтальная грань - синяя
-    Yellow->set_ptr('u', Green);
-    Yellow->set_ptr('r', Red);
-    Yellow->set_ptr('d', Blue);
-    Yellow->set_ptr('l', Orange);
+        Yellow->set_ptr('u', Green);
+        Yellow->set_ptr('r', Red);
+        Yellow->set_ptr('d', Blue);
+        Yellow->set_ptr('l', Orange);
 
-    Blue->set_ptr('u',Yellow);
-    Blue->set_ptr('r',Red);
-    Blue->set_ptr('d',White);
-    Blue->set_ptr('l',Orange);
+        Blue->set_ptr('u',Yellow);
+        Blue->set_ptr('r',Red);
+        Blue->set_ptr('d',White);
+        Blue->set_ptr('l',Orange);
 
-    Red->set_ptr('u',Yellow);
-    Red->set_ptr('r',Green);
-    Red->set_ptr('d',White);
-    Red->set_ptr('l',Blue);
+        Red->set_ptr('u',Yellow);
+        Red->set_ptr('r',Green);
+        Red->set_ptr('d',White);
+        Red->set_ptr('l',Blue);
 
-    Green->set_ptr('u',Yellow);
-    Green->set_ptr('r',Orange);
-    Green->set_ptr('d',White);
-    Green->set_ptr('l',Red);
+        Green->set_ptr('u',Yellow);
+        Green->set_ptr('r',Orange);
+        Green->set_ptr('d',White);
+        Green->set_ptr('l',Red);
 
-    Orange->set_ptr('u',Yellow);
-    Orange->set_ptr('r',Blue);
-    Orange->set_ptr('d',White);
-    Orange->set_ptr('l',Green);
+        Orange->set_ptr('u',Yellow);
+        Orange->set_ptr('r',Blue);
+        Orange->set_ptr('d',White);
+        Orange->set_ptr('l',Green);
 
-    White->set_ptr('u',Blue);
-    White->set_ptr('r',Red);
-    White->set_ptr('d',Green);
-    White->set_ptr('l',Orange);
+        White->set_ptr('u',Blue);
+        White->set_ptr('r',Red);
+        White->set_ptr('d',Green);
+        White->set_ptr('l',Orange);
+    }
 };
 
 

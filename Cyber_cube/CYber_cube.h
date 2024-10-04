@@ -103,7 +103,7 @@ public:
     #d конструктор, он же и поумолчанию
     #b is_asm=1 - готовое состояние, т.е. собранная головоломка
     */
-    RubicsCube(bool is_asm = false);
+    RubicsCube(bool is_asm = false, std::string st = "");
     
     /*
     #d деструктор
@@ -121,6 +121,17 @@ public:
     #d реализация простейших действий алфавита кубика-рубика
     */
     void move(char c);
+
+    std::string get_state(){
+        std::string result = "";
+        for(int i = 0; i < 9;++i) result = result + Yellow->get_color(i);
+        for(int i = 0; i < 9;++i) result = result + Orange->get_color(i);
+        for(int i = 0; i < 9;++i) result = result + Blue->get_color(i);
+        for(int i = 0; i < 9;++i) result = result + Red->get_color(i);
+        for(int i = 0; i < 9;++i) result = result + White->get_color(i);
+        for(int i = 0; i < 9;++i) result = result + Green->get_color(i);
+        return result;
+    }
 
     friend std::ostream& operator << (std::ostream& s, const RubicsCube& r){
         s << "       " << r.Yellow->get_color(0) << " " << r.Yellow->get_color(1) << " " << r.Yellow->get_color(2) << '\n'

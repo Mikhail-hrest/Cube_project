@@ -813,12 +813,5 @@ std::string PuzzleSolver::puzzle_solution(){
 }
 
 std::string PuzzleSolver::get_state(){
-    std::string result = "";
-    for(int i = 0; i < 9;++i) result = result + rubic->Yellow->get_color(i);
-    for(int i = 0; i < 9;++i) result = result + rubic->Orange->get_color(i);
-    for(int i = 0; i < 9;++i) result = result + rubic->Blue->get_color(i);
-    for(int i = 0; i < 9;++i) result = result + rubic->Red->get_color(i);
-    for(int i = 0; i < 9;++i) result = result + rubic->White->get_color(i);
-    for(int i = 0; i < 9;++i) result = result + rubic->Green->get_color(i);
-    return result;
+    return rubic->get_state();
 }

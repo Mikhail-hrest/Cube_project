@@ -1,2 +1,0 @@
-/usr/bin/ar qc libCyber_cube.a CMakeFiles/Cyber_cube.dir/Algorithms.cpp.o CMakeFiles/Cyber_cube.dir/CYber_cube.cpp.o
-/usr/bin/ranlib libCyber_cube.a
